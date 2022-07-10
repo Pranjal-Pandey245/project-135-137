@@ -1,0 +1,22 @@
+div{
+    width: 100%;
+    padding:10px;
+
+}
+
+p{
+    font-size:18px;
+}
+
+
+input{
+    width: 700px;
+    height: 40px;
+}
+
+
+canvas{
+    border: 5px solid black;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px gray;
+}
