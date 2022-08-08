@@ -1,5 +1,5 @@
 status="";
-text="";
+text1="";
 objects=[];
 
 function setup(){
@@ -13,7 +13,7 @@ function setup(){
 function start(){
     objectDetector= ml5.objectDetector('cocossd', modalLoaded);
     document.getElementById("status").innerHTML= "Status: Detecting objects";
-    text= document.getElementById("input").value;
+    text1= document.getElementById("input").value;
 }
 
 function modalLoaded(){
@@ -33,24 +33,19 @@ function draw(){
 
             fill('red');
             stroke('red');
-            
+            text(objects[i].label + " " + percent + "%", objects[i].x + 15, objects[i].y + 15);
             noFill();
             rect(objects[i].x, objects[i].y, objects[i].width, objects[i].height);
 
+            document.getElementById("status").innerHTML= "Objects detected";
+            document.getElementById("status_object").innerHTML= text1+" found";
             
+            synth = window.speechSynthesis;
+            utterThis = new SpeechSynthesisUtterance(objects[i].label+" found");
+            synth.speak(utterThis);
         }
 
-        if(objects[i].label== text){
-            document.getElementById("status_object").innerHTML= objects[i].label+ " found";
-            synth = window.speechSynthesis;
-            utterThis = new SpeechSynthesisUtterance(objects[i].label + " found");
-            synth.speak(utterThis);
-            video.stop();
-            objectDetector.detect(gotResult);
-        }
-        else{
-            document.getElementById("status_object").innerHTML= text+ " not found";
-        }
+       
     }
 }
 
